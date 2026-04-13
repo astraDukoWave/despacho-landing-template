@@ -15,8 +15,32 @@
       ? "https://wa.me/" + waNumber
       : "https://wa.me/" + WA_PLACEHOLDER;
 
+  var waOrigin = "";
+  try {
+    waOrigin = String(
+      (document.body && document.body.getAttribute("data-wa-origin")) || ""
+    ).trim();
+  } catch (e2) {
+    waOrigin = "";
+  }
+
+  function appendOriginBlock(message) {
+    if (!waOrigin) return message;
+    return message + "%0A%0A*Origen:* " + waOrigin;
+  }
+
+  var linkHref = waHref;
+  if (waOrigin) {
+    var linkIntro =
+      "Hola, quiero asesoría legal.%0A%0A*Origen:* " + waOrigin;
+    var linkEncoded = encodeURIComponent(
+      linkIntro.split("%0A").join("\n")
+    );
+    linkHref = waHref + "?text=" + linkEncoded;
+  }
+
   document.querySelectorAll("[data-whatsapp]").forEach(function (el) {
-    el.setAttribute("href", waHref);
+    el.setAttribute("href", linkHref);
   });
 
   var yearEl = document.getElementById("year");
@@ -52,6 +76,7 @@
       phone +
       "%0A*Mi caso:* " +
       caseSummary;
+    message = appendOriginBlock(message);
     var encodedString = encodeURIComponent(
       message.split("%0A").join("\n")
     );
