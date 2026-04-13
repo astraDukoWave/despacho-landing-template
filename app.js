@@ -25,7 +25,6 @@
   }
 
   var form = document.getElementById("case-form");
-  var successEl = document.getElementById("form-success");
 
   if (!form) return;
 
@@ -37,30 +36,27 @@
     }
 
     var data = new FormData(form);
-    var payload = {
-      fullName: String(data.get("full-name") || "").trim(),
-      phone: String(data.get("phone") || "").trim(),
-      caseSummary: String(data.get("case-summary") || "").trim(),
-      submittedAt: new Date().toISOString(),
-    };
+    var name = String(data.get("full-name") || "").trim();
+    var phone = String(data.get("phone") || "").trim();
+    var caseSummary = String(data.get("case-summary") || "").trim();
 
-    try {
-      localStorage.setItem(
-        "landing_case_leads",
-        JSON.stringify(
-          JSON.parse(localStorage.getItem("landing_case_leads") || "[]").concat(
-            payload
-          )
-        )
-      );
-    } catch (err) {
-      /* storage full or disabled — still show confirmation */
+    var digits = waNumber.length >= 8 ? waNumber : WA_PLACEHOLDER.replace(/\D/g, "");
+    if (!digits) {
+      digits = waNumber;
     }
 
-    form.reset();
-    if (successEl) {
-      successEl.hidden = false;
-      successEl.focus();
-    }
+    var message =
+      "Hola, necesito ayuda legal urgente.%0A%0A*Nombre:* " +
+      name +
+      "%0A*Teléfono:* " +
+      phone +
+      "%0A*Mi caso:* " +
+      caseSummary;
+    var encodedString = encodeURIComponent(
+      message.split("%0A").join("\n")
+    );
+
+    var url = "https://wa.me/" + digits + "?text=" + encodedString;
+    window.open(url, "_blank", "noopener,noreferrer");
   });
 })();

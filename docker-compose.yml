@@ -1,9 +1,0 @@
-services:
-  web:
-    build: .
-    ports:
-      - "${PORT:-8080}:80"
-    environment:
-      - PORT=${PORT:-8080}
-      # E.164 digits only, country code included (example: 34600111222)
-      - WA_NUMBER=${WA_NUMBER:-}
