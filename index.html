@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Ayuda legal urgente. Atención confidencial por WhatsApp. Evaluamos tu caso en minutos."
+      content="Elige tu situación: emergencias penales, recuperación civil o laboral, o fiscal corporativo. Evaluación inmediata con el especialista adecuado."
     />
-    <title>Asesoría Legal Urgente — Atención confidencial e inmediata</title>
+    <title>Asesoría Legal Urgente — Portal de triage legal</title>
     <link rel="stylesheet" href="/styles.css" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%231c2840'/%3E%3Cpath stroke='%23f4f2ec' stroke-width='2' fill='none' d='M10 22V10M16 10v12M22 10v12'/%3E%3C/svg%3E" />
   </head>
@@ -23,66 +23,68 @@
 
     <main id="main-content">
       <section class="hero" aria-labelledby="hero-title">
-        <div class="wrap hero__inner">
-          <p class="hero__urgency" role="status">
-            Si tienes un citatorio, detención o demanda, el tiempo es clave.
-          </p>
-          <h1 id="hero-title" class="hero__title">
-            ¿Tienes un problema legal urgente? Habla con un abogado ahora por WhatsApp.
-          </h1>
-          <p class="hero__lead">
-            Atención inmediata, profesional y 100% confidencial. Evaluamos tu caso en minutos para decirte exactamente qué hacer y protegerte.
-          </p>
-          <div class="hero__cta">
-            <a
-              class="btn btn--primary"
-              href="https://wa.me/REPLACE_PHONE_E164"
-              data-whatsapp
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Enviar mensaje por WhatsApp
-            </a>
-            <a class="btn btn--secondary" href="#contact">
-              Describir mi caso aquí
-            </a>
+        <div class="wrap">
+          <div class="hero__intro">
+            <h1 id="hero-title" class="hero__title">
+              ¿Qué tipo de apoyo legal necesitas hoy?
+            </h1>
+            <p class="hero__lead">
+              Selecciona tu situación para conectarte con el abogado especialista y recibir una evaluación inmediata.
+            </p>
+          </div>
+          <div class="triage-gates" role="navigation" aria-label="Tipo de apoyo legal">
+            <article class="triage-gate">
+              <h2 class="triage-gate__title">Emergencia Inmediata</h2>
+              <p class="triage-gate__text">
+                Detenciones, citatorios, Ministerio Público o accidentes. Respuesta en minutos.
+              </p>
+              <a class="btn btn--primary btn--block triage-gate__action" href="/urgente.html">
+                Ir a Defensa 24/7
+              </a>
+            </article>
+            <article class="triage-gate">
+              <h2 class="triage-gate__title">Recuperación y Derechos</h2>
+              <p class="triage-gate__text">
+                Despidos, adeudos, problemas civiles o de propiedad.
+              </p>
+              <a class="btn btn--primary btn--block triage-gate__action" href="/recuperacion.html">
+                Ver Viabilidad de Caso
+              </a>
+            </article>
+            <article class="triage-gate">
+              <h2 class="triage-gate__title">Fiscal y Corporativo</h2>
+              <p class="triage-gate__text">
+                Problemas con el SAT, auditorías o blindaje empresarial.
+              </p>
+              <a class="btn btn--primary btn--block triage-gate__action" href="/estrategico.html">
+                Solicitar Análisis Técnico
+              </a>
+            </article>
           </div>
           <p class="hero__note">
-            Atención 24/7 para emergencias legales. Hablarás directamente con un abogado, no con bots.
+            Atención confidencial. Hablarás con abogados, no con bots. Si ya conoces tu canal, el formulario de contacto sigue disponible al final de la página.
           </p>
         </div>
       </section>
 
-      <section class="section" id="services" aria-labelledby="services-title">
+      <section class="section section--spectrum" id="services" aria-labelledby="services-title">
         <div class="wrap">
           <h2 id="services-title" class="section__title">Áreas de práctica</h2>
-          <p class="section__intro">
-            Nos enfocamos en resolver problemas urgentes con la discreción y agresividad legal que necesitas.
+          <p class="section__intro section__intro--spectrum">
+            El triage de arriba te lleva al canal adecuado. Aquí solo confirmamos el espectro: penal y emergencias, patrimonio y relaciones jurídicas privadas, y obligaciones fiscales con enfoque empresarial.
           </p>
-          <ul class="cards">
-            <li class="card">
-              <h3 class="card__title">Defensa Penal 24/7</h3>
-              <p class="card__text">
-                Me detuvieron, tengo un citatorio o un familiar está en el Ministerio Público.
-              </p>
+          <ul class="cards cards--spectrum">
+            <li class="card card--spectrum">
+              <h3 class="card__title">Penal y actuaciones urgentes</h3>
+              <p class="card__text">MP, juzgados, medidas cautelares y defensa inmediata.</p>
             </li>
-            <li class="card">
-              <h3 class="card__title">Demandas y Contratos</h3>
-              <p class="card__text">
-                Me demandaron, tengo problemas con una propiedad, un inquilino o un cobro urgente.
-              </p>
+            <li class="card card--spectrum">
+              <h3 class="card__title">Civil, laboral y patrimonial</h3>
+              <p class="card__text">Contratos, adeudos, inmuebles, empleo y recuperación de derechos.</p>
             </li>
-            <li class="card">
-              <h3 class="card__title">Problemas Laborales</h3>
-              <p class="card__text">
-                Me despidieron injustamente, me quieren hacer firmar renuncia o no me quieren pagar.
-              </p>
-            </li>
-            <li class="card">
-              <h3 class="card__title">Urgencias Familiares</h3>
-              <p class="card__text">
-                Problemas graves de custodia, pensiones alimenticias o divorcios urgentes.
-              </p>
+            <li class="card card--spectrum">
+              <h3 class="card__title">Fiscal y societario</h3>
+              <p class="card__text">Autoridades fiscales, cumplimiento y estructura de negocio.</p>
             </li>
           </ul>
         </div>
