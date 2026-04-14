@@ -82,6 +82,31 @@
     );
 
     var url = "https://wa.me/" + digits + "?text=" + encodedString;
-    window.open(url, "_blank", "noopener,noreferrer");
+
+    var waWindow = window.open("about:blank", "_blank");
+
+    var submitBtn = form.querySelector('[type="submit"]');
+    var originalText = submitBtn.textContent;
+    submitBtn.textContent = "Procesando caso de forma segura\u2026";
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = "0.6";
+    submitBtn.style.cursor = "wait";
+
+    setTimeout(function () {
+      if (waWindow && !waWindow.closed) {
+        waWindow.location.href = url;
+      }
+
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = "";
+      submitBtn.style.cursor = "";
+
+      var successEl = document.getElementById("form-success");
+      if (successEl) {
+        successEl.hidden = false;
+        successEl.focus();
+      }
+    }, 800);
   });
 })();
