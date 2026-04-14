@@ -12,6 +12,9 @@
   --color-gold-light: #d4a94720;
   --color-whatsapp: #25D366;
   --color-whatsapp-hover: #1da851;
+  --theme-urgent: #8b0000;
+  --theme-recovery: #2c4a6e;
+  --theme-strategic: #a16207;
   --space-xs: 0.5rem;
   --space-sm: 0.75rem;
   --space-md: 1rem;
@@ -256,7 +259,7 @@ h1, h2, h3, h4, h5, h6 {
 .triage-gate__title {
   margin: 0 0 var(--space-sm);
   font-family: var(--font-serif);
-  font-size: 1.1875rem;
+  font-size: 1.375rem;
   font-weight: 700;
   line-height: 1.25;
   color: var(--color-ink);
@@ -264,7 +267,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (min-width: 36rem) {
   .triage-gate__title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -663,6 +666,164 @@ h1, h2, h3, h4, h5, h6 {
 .cards--spectrum {
   grid-template-columns: 1fr;
   gap: var(--space-sm);
+}
+
+/* ─── Theme Accents via data-wa-origin ─── */
+[data-wa-origin="Urgente"] .site-header {
+  border-top: 3px solid var(--theme-urgent);
+}
+[data-wa-origin="Urgente"] .btn--primary {
+  background-color: var(--theme-urgent);
+}
+[data-wa-origin="Urgente"] .btn--primary:hover {
+  background-color: #6b0000;
+}
+
+[data-wa-origin="Recuperación"] .site-header {
+  border-top: 3px solid var(--theme-recovery);
+}
+[data-wa-origin="Recuperación"] .btn--primary {
+  background-color: var(--theme-recovery);
+}
+[data-wa-origin="Recuperación"] .btn--primary:hover {
+  background-color: #1e3650;
+}
+
+[data-wa-origin="Fiscal"] .site-header {
+  border-top: 3px solid var(--theme-strategic);
+}
+[data-wa-origin="Fiscal"] .btn--primary {
+  background-color: var(--theme-strategic);
+}
+[data-wa-origin="Fiscal"] .btn--primary:hover {
+  background-color: #845105;
+}
+
+/* ─── Triage Gate Variants ─── */
+.triage-gate--urgent {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+.triage-gate--urgent::before {
+  background: var(--theme-urgent);
+}
+.triage-gate--urgent:hover {
+  border-color: var(--theme-urgent);
+}
+
+.triage-gate--recovery {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+.triage-gate--recovery::before {
+  background: var(--theme-recovery);
+}
+.triage-gate--recovery:hover {
+  border-color: var(--theme-recovery);
+}
+
+.triage-gate--strategic {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+.triage-gate--strategic::before {
+  background: var(--theme-strategic);
+}
+.triage-gate--strategic:hover {
+  border-color: var(--theme-strategic);
+}
+
+/* ─── Triage Gate Iconography ─── */
+.triage-gate__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: var(--space-md);
+  border-radius: 6px;
+  position: relative;
+}
+
+.triage-gate--urgent .triage-gate__icon {
+  background: rgba(139, 0, 0, 0.1);
+}
+.triage-gate--urgent .triage-gate__icon::before {
+  content: "";
+  width: 1.25rem;
+  height: 1.25rem;
+  background: var(--theme-urgent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.15);
+}
+.triage-gate--urgent .triage-gate__icon::after {
+  content: "!";
+  position: absolute;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.triage-gate--recovery .triage-gate__icon {
+  background: rgba(44, 74, 110, 0.1);
+}
+.triage-gate--recovery .triage-gate__icon::before {
+  content: "";
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2.5px solid var(--theme-recovery);
+  border-radius: 3px;
+  position: relative;
+}
+.triage-gate--recovery .triage-gate__icon::after {
+  content: "";
+  position: absolute;
+  width: 0.625rem;
+  height: 2.5px;
+  background: var(--theme-recovery);
+  border-radius: 1px;
+}
+
+.triage-gate--strategic .triage-gate__icon {
+  background: rgba(161, 98, 7, 0.1);
+}
+.triage-gate--strategic .triage-gate__icon::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 0.625rem solid transparent;
+  border-right: 0.625rem solid transparent;
+  border-bottom: 1.125rem solid var(--theme-strategic);
+  position: relative;
+  top: -1px;
+}
+.triage-gate--strategic .triage-gate__icon::after {
+  content: "";
+  position: absolute;
+  bottom: 0.625rem;
+  width: 1.25rem;
+  height: 2.5px;
+  background: var(--theme-strategic);
+  border-radius: 1px;
+}
+
+/* ─── Social Proof ─── */
+.hero__social-proof {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-muted);
+  border-top: 1px solid var(--color-border);
+}
+
+.hero__social-proof span {
+  color: var(--color-gold);
 }
 
 /* ─── Responsive breakpoints ─── */
