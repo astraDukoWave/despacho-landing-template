@@ -32,7 +32,7 @@
   var linkHref = waHref;
   if (waOrigin) {
     var linkIntro =
-      "Hola, quiero asesoría legal.%0A%0A*Origen:* " + waOrigin;
+      "Hola, necesito apoyo legal. Me gustaría que canalicen mi caso.%0A%0A*Origen:* " + waOrigin;
     var linkEncoded = encodeURIComponent(
       linkIntro.split("%0A").join("\n")
     );
@@ -70,7 +70,7 @@
     }
 
     var message =
-      "Hola, necesito ayuda legal urgente.%0A%0A*Nombre:* " +
+      "Hola, envié mi caso por el formulario de Apoyo Legal MX. Necesito ayuda.%0A%0A*Nombre:* " +
       name +
       "%0A*Teléfono:* " +
       phone +
