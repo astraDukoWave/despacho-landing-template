@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Apoyo Legal MX — Demo Facebook 30s</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Libre+Baskerville:wght@400;700&display=swap" />
+  <style>
+    :root {
+      --color-bg: #fdfcf8;
+      --color-bg-alt: #f5f3ee;
+      --color-surface: #ffffff;
+      --color-ink: #0f172a;
+      --color-ink-muted: #475569;
+      --color-border: #d4cfc5;
+      --color-accent: #1e3a5f;
+      --color-gold: #a16207;
+      --color-gold-light: #d4a94720;
+      --color-whatsapp: #25D366;
+      --color-whatsapp-hover: #1da851;
+      --theme-urgent: #8b0000;
+      --theme-recovery: #2c4a6e;
+      --theme-strategic: #a16207;
+      --font-serif: "Libre Baskerville", Georgia, serif;
+      --font-sans: "Inter", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
+      font-family: var(--font-sans);
+      color: var(--color-ink);
+      background: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+    }
+
+    /* --- Scene 1: Logo --- */
+    .scene-logo {
+      background: #1c2840;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .scene-logo .logo-main {
+      font-family: var(--font-serif);
+      font-size: 72px;
+      font-weight: 700;
+      color: #f4f2ec;
+      letter-spacing: 0.04em;
+      font-variant: small-caps;
+      transform: scale(0.3);
+      opacity: 0;
+    }
+    .scene-logo .logo-tagline {
+      font-family: var(--font-sans);
+      font-size: 28px;
+      color: #a0aec0;
+      opacity: 0;
+    }
+
+    /* --- Scene 2, 4, 6: Text Overlays --- */
+    .scene-overlay {
+      background: #1c2840;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .scene-overlay .overlay-text {
+      font-family: var(--font-sans);
+      font-size: 56px;
+      font-weight: 700;
+      color: #f4f2ec;
+      text-align: center;
+      line-height: 1.25;
+      max-width: 880px;
+      padding: 0 60px;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .scene-overlay .overlay-accent {
+      width: 80px;
+      height: 4px;
+      background: var(--color-gold);
+      opacity: 0;
+    }
+
+    /* --- Scene 3: Triage Cards --- */
+    .scene-triage {
+      background: var(--color-bg);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      padding: 60px;
+    }
+    .scene-triage .triage-title {
+      font-family: var(--font-serif);
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--color-ink);
+      text-align: center;
+      opacity: 0;
+    }
+    .triage-cards-row {
+      display: flex;
+      gap: 28px;
+      width: 100%;
+      max-width: 960px;
+    }
+    .triage-card {
+      flex: 1;
+      background: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: 6px;
+      padding: 36px 28px 28px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .triage-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: 6px 6px 0 0;
+    }
+    .triage-card--urgent { background: rgba(254,242,242,0.65); border-color: rgba(254,202,202,0.6); }
+    .triage-card--urgent::before { background: var(--theme-urgent); }
+    .triage-card--recovery { background: rgba(239,246,255,0.65); border-color: rgba(191,219,254,0.6); }
+    .triage-card--recovery::before { background: var(--theme-recovery); }
+    .triage-card--strategic { background: rgba(255,251,235,0.65); border-color: rgba(253,230,138,0.6); }
+    .triage-card--strategic::before { background: var(--theme-strategic); }
+
+    .triage-card__icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+    }
+    .triage-card--urgent .triage-card__icon { color: var(--theme-urgent); }
+    .triage-card--recovery .triage-card__icon { color: var(--theme-recovery); }
+    .triage-card--strategic .triage-card__icon { color: var(--theme-strategic); }
+
+    .triage-card__title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--color-ink);
+    }
+    .triage-card__text {
+      font-size: 15px;
+      color: var(--color-ink-muted);
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+    .triage-card__btn {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--color-accent);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      border: none;
+      border-radius: 4px;
+    }
+
+    /* --- Scene 5: Form --- */
+    .scene-form {
+      background: var(--color-surface);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 80px;
+    }
+    .scene-form .form-title {
+      font-family: var(--font-serif);
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--color-ink);
+      margin-bottom: 12px;
+      opacity: 0;
+    }
+    .scene-form .form-subtitle {
+      font-size: 18px;
+      color: var(--color-ink-muted);
+      margin-bottom: 36px;
+      text-align: center;
+      max-width: 600px;
+      opacity: 0;
+    }
+    .form-container {
+      width: 100%;
+      max-width: 560px;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .form-field {
+      margin-bottom: 20px;
+    }
+    .form-field label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin-bottom: 6px;
+    }
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      border: 1.5px solid var(--color-border);
+      border-radius: 4px;
+      background: var(--color-bg);
+      color: var(--color-ink);
+    }
+    .form-field textarea {
+      height: 120px;
+      resize: none;
+      line-height: 1.5;
+    }
+    .form-field input.filled,
+    .form-field textarea.filled {
+      border-color: var(--color-accent);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(30,58,95,0.12);
+    }
+    .typewriter-cursor {
+      display: inline;
+      animation: blink 0.6s step-end infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* --- Scene 7: WhatsApp CTA --- */
+    .scene-whatsapp {
+      background: #1c2840;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+    .wa-label {
+      font-family: var(--font-sans);
+      font-size: 32px;
+      font-weight: 600;
+      color: #a0aec0;
+      opacity: 0;
+    }
+    .wa-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      width: 420px;
+      height: 80px;
+      background: var(--color-whatsapp);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 28px;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.35);
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    .wa-btn svg {
+      width: 36px;
+      height: 36px;
+      fill: #fff;
+    }
+    .wa-endcard {
+      font-family: var(--font-sans);
+      font-size: 18px;
+      color: #64748b;
+      opacity: 0;
+    }
+
+    /* Glitch overlay for urgent card */
+    .glitch-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 6px;
+      pointer-events: none;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     HYPERFRAMES COMPOSITION — 30s @ 30fps, 1080x1080
+     Audio recommendation: 120–130 BPM corporate/tech beat,
+     constant rhythm, no vocals. Cut transitions every ~3s
+     align with downbeats for punch.
+     ============================================================ -->
+<div id="stage"
+     data-composition-id="demo-facebook"
+     data-width="1080"
+     data-height="1080"
+     data-fps="30"
+     data-frame-adapter="gsap">
+
+  <!-- ==================== AUDIO ==================== -->
+  <!--
+    Supply a royalty-free corporate track at ./audio/corporate-bg.mp3
+    Recommended: 120-130 BPM, steady beat, modern/serious tone.
+    Transitions hit at 3s, 6s, 14s, 17s, 22s, 25s — pick a track
+    whose downbeats land near these marks for natural cuts.
+  -->
+  <audio
+    src="./audio/corporate-bg.mp3"
+    data-start="0"
+    data-duration="30"
+    data-track-index="0">
+  </audio>
+
+  <!-- ==================== SCENE 1: LOGO (0s–3s) ==================== -->
+  <div class="clip scene scene-logo" id="scene-logo"
+       data-start="0" data-duration="3" data-track-index="1">
+    <div class="logo-main">Apoyo Legal MX</div>
+    <div class="logo-tagline">Atención inmediata y confidencial</div>
+  </div>
+
+  <!-- ==================== SCENE 2: OVERLAY 1 (3s–6s) ==================== -->
+  <div class="clip scene scene-overlay" id="scene-overlay-1"
+       data-start="3" data-duration="3" data-track-index="1">
+    <div class="overlay-accent"></div>
+    <div class="overlay-text">Triage legal inteligente</div>
+    <div class="overlay-accent"></div>
+  </div>
+
+  <!-- ==================== SCENE 3: TRIAGE CARDS (6s–14s) ==================== -->
+  <div class="clip scene scene-triage" id="scene-triage"
+       data-start="6" data-duration="8" data-track-index="1">
+    <div class="triage-title">¿Qué tipo de apoyo legal necesitas?</div>
+    <div class="triage-cards-row">
+
+      <!-- Card 1: Emergencia (3.5s exposure + glitch) -->
+      <div class="triage-card triage-card--urgent" id="card-urgent">
+        <div class="glitch-overlay" id="glitch-urgent"></div>
+        <div class="triage-card__icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="15"/><path d="M5 7l7-4 7 4"/><circle cx="5" cy="7" r="1"/><circle cx="19" cy="7" r="1"/><line x1="4" y1="21" x2="20" y2="21"/><line x1="12" y1="15" x2="12" y2="21"/></svg>
+        </div>
+        <div class="triage-card__title">Emergencia Inmediata</div>
+        <div class="triage-card__text">Detenciones, citatorios, Ministerio Público o accidentes. Respuesta en minutos.</div>
+        <div class="triage-card__btn">Ir a Defensa 24/7 →</div>
+      </div>
+
+      <!-- Card 2: Recuperación (2.25s exposure) -->
+      <div class="triage-card triage-card--recovery" id="card-recovery">
+        <div class="triage-card__icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/></svg>
+        </div>
+        <div class="triage-card__title">Recuperación y Derechos</div>
+        <div class="triage-card__text">Despidos, adeudos, problemas civiles o de propiedad.</div>
+        <div class="triage-card__btn">Ver Viabilidad de Caso →</div>
+      </div>
+
+      <!-- Card 3: Estratégico (2.25s exposure) -->
+      <div class="triage-card triage-card--strategic" id="card-strategic">
+        <div class="triage-card__icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+        </div>
+        <div class="triage-card__title">Fiscal y Corporativo</div>
+        <div class="triage-card__text">Problemas con el SAT, auditorías o blindaje empresarial.</div>
+        <div class="triage-card__btn">Solicitar Análisis Técnico →</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== SCENE 4: OVERLAY 2 (14s–17s) ==================== -->
+  <div class="clip scene scene-overlay" id="scene-overlay-2"
+       data-start="14" data-duration="3" data-track-index="1">
+    <div class="overlay-accent"></div>
+    <div class="overlay-text">Especialistas para cada caso</div>
+    <div class="overlay-accent"></div>
+  </div>
+
+  <!-- ==================== SCENE 5: FORM + TYPEWRITER (17s–22s) ==================== -->
+  <div class="clip scene scene-form" id="scene-form"
+       data-start="17" data-duration="5" data-track-index="1">
+    <div class="form-title">Cuéntanos tu situación</div>
+    <div class="form-subtitle">Deja tus datos y un resumen breve. Te contactaremos de inmediato.</div>
+    <div class="form-container">
+      <div class="form-field">
+        <label>Nombre completo</label>
+        <input type="text" value="María García López" class="filled" readonly />
+      </div>
+      <div class="form-field">
+        <label>Teléfono (WhatsApp)</label>
+        <input type="tel" value="55 1234 5678" class="filled" readonly />
+      </div>
+      <div class="form-field">
+        <label>Resumen breve de tu problema</label>
+        <textarea id="typewriter-target" class="filled" readonly></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SCENE 6: OVERLAY 3 (22s–25s) ==================== -->
+  <div class="clip scene scene-overlay" id="scene-overlay-3"
+       data-start="22" data-duration="3" data-track-index="1">
+    <div class="overlay-accent"></div>
+    <div class="overlay-text">Atención inmediata 24/7</div>
+    <div class="overlay-accent"></div>
+  </div>
+
+  <!-- ==================== SCENE 7: WHATSAPP CTA (25s–30s) ==================== -->
+  <div class="clip scene scene-whatsapp" id="scene-whatsapp"
+       data-start="25" data-duration="5" data-track-index="1">
+    <div class="wa-label">¿Necesitas ayuda ahora?</div>
+    <div class="wa-btn" id="wa-pulse-btn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.555 4.126 1.528 5.867L.06 23.495a.5.5 0 00.608.622l5.727-1.407A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.23-1.481l-.364-.222-3.792.932.982-3.724-.244-.381A9.94 9.94 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+      WhatsApp
+    </div>
+    <div class="wa-endcard">Apoyo Legal MX · apoyo-legal.mx</div>
+  </div>
+
+</div><!-- /stage -->
+
+<!-- ==================== SCRIPTS ==================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+<script src="https://unpkg.com/@hyperframes/core/dist/frame-adapters/gsap.js"></script>
+
+<script>
+gsap.registerPlugin(TextPlugin);
+
+/* ── Helper: standard scene enter/exit ── */
+function sceneEnterExit(tl, el, innerDur) {
+  tl.to(el, { opacity: 1, duration: 0.3 });
+  tl.to({}, { duration: innerDur });
+  tl.to(el, { opacity: 0, duration: 0.25 });
+}
+
+/* ── Helper: overlay text animation ── */
+function overlayScene(tl, sceneEl) {
+  const texts = sceneEl.querySelectorAll(".overlay-text");
+  const accents = sceneEl.querySelectorAll(".overlay-accent");
+  tl.to(sceneEl, { opacity: 1, duration: 0.2 });
+  tl.to(accents, { opacity: 1, duration: 0.3, stagger: 0.1 }, "<");
+  tl.to(texts, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.1");
+  tl.to({}, { duration: 1.2 });
+  tl.to(sceneEl, { opacity: 0, duration: 0.3 });
+}
+
+/* ══════════════════════════════════════════
+   SCENE 1 — Logo (0s – 3s)
+   ══════════════════════════════════════════ */
+(function () {
+  const el = document.getElementById("scene-logo");
+  const tl = gsap.timeline({ data: { clipId: "scene-logo" } });
+
+  tl.to(el, { opacity: 1, duration: 0.01 });
+  tl.fromTo(
+    el.querySelector(".logo-main"),
+    { scale: 0.3, opacity: 0 },
+    { scale: 1, opacity: 1, duration: 1.6, ease: "power3.out" }
+  );
+  tl.fromTo(
+    el.querySelector(".logo-tagline"),
+    { opacity: 0, y: 15 },
+    { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+    "-=0.3"
+  );
+  tl.to({}, { duration: 0.4 });
+  tl.to(el, { opacity: 0, duration: 0.3 });
+})();
+
+/* ══════════════════════════════════════════
+   SCENE 2 — "Triage legal inteligente" (3s – 6s)
+   ══════════════════════════════════════════ */
+(function () {
+  const el = document.getElementById("scene-overlay-1");
+  const tl = gsap.timeline({ data: { clipId: "scene-overlay-1" } });
+  overlayScene(tl, el);
+})();
+
+/* ══════════════════════════════════════════
+   SCENE 3 — Triage Cards (6s – 14s)
+   Card 1: 3.5s with glitch | Card 2: 2.25s | Card 3: 2.25s
+   ══════════════════════════════════════════ */
+(function () {
+  const el = document.getElementById("scene-triage");
+  const tl = gsap.timeline({ data: { clipId: "scene-triage" } });
+
+  const cardUrgent = document.getElementById("card-urgent");
+  const cardRecovery = document.getElementById("card-recovery");
+  const cardStrategic = document.getElementById("card-strategic");
+  const glitch = document.getElementById("glitch-urgent");
+
+  tl.to(el, { opacity: 1, duration: 0.3 });
+  tl.to(el.querySelector(".triage-title"), { opacity: 1, duration: 0.4 });
+
+  /* ── Card 1: Emergencia Inmediata — 3.5s with glitch ── */
+  tl.to(cardUrgent, {
+    opacity: 1, y: 0, duration: 0.4, ease: "power2.out"
+  });
+  tl.to(cardUrgent, {
+    borderColor: "#8b0000",
+    boxShadow: "0 0 40px rgba(139,0,0,0.6), inset 0 0 20px rgba(139,0,0,0.1)",
+    duration: 0.3
+  });
+
+  /* Glitch flicker: rapid opacity bursts */
+  tl.fromTo(glitch,
+    { opacity: 0, background: "rgba(139,0,0,0.25)" },
+    {
+      opacity: 1, duration: 0.08, repeat: 5, yoyo: true,
+      ease: "steps(1)",
+      onStart: function () {
+        gsap.set(cardUrgent, { x: 0 });
+      }
+    }
+  );
+  tl.to(cardUrgent, {
+    x: -3, duration: 0.05, repeat: 3, yoyo: true, ease: "steps(1)"
+  });
+  tl.set(cardUrgent, { x: 0 });
+  tl.set(glitch, { opacity: 0 });
+
+  tl.to(cardUrgent, {
+    borderColor: "#8b0000",
+    boxShadow: "0 0 30px rgba(139,0,0,0.4)",
+    duration: 0.4
+  });
+  tl.to({}, { duration: 1.5 });
+
+  /* ── Card 2: Recuperación — 2.25s ── */
+  tl.to(cardRecovery, {
+    opacity: 1, y: 0, duration: 0.35, ease: "power2.out"
+  });
+  tl.to(cardRecovery, {
+    borderColor: "#a16207",
+    boxShadow: "0 0 30px rgba(161,98,7,0.45)",
+    duration: 0.4
+  });
+  tl.to({}, { duration: 1.0 });
+
+  /* ── Card 3: Fiscal — 2.25s ── */
+  tl.to(cardStrategic, {
+    opacity: 1, y: 0, duration: 0.35, ease: "power2.out"
+  });
+  tl.to(cardStrategic, {
+    borderColor: "#a16207",
+    boxShadow: "0 0 30px rgba(161,98,7,0.45)",
+    duration: 0.4
+  });
+  tl.to({}, { duration: 0.8 });
+
+  tl.to(el, { opacity: 0, duration: 0.3 });
+})();
+
+/* ══════════════════════════════════════════
+   SCENE 4 — "Especialistas para cada caso" (14s – 17s)
+   ══════════════════════════════════════════ */
+(function () {
+  const el = document.getElementById("scene-overlay-2");
+  const tl = gsap.timeline({ data: { clipId: "scene-overlay-2" } });
+  overlayScene(tl, el);
+})();
+
+/* ══════════════════════════════════════════
+   SCENE 5 — Form + Typewriter (17s – 22s)
+   ══════════════════════════════════════════ */
+(function () {
+  const el = document.getElementById("scene-form");
+  const tl = gsap.timeline({ data: { clipId: "scene-form" } });
+
+  const typewriterText =
+    "Me despidieron injustificadamente tras 5 años de trabajo y se niegan a pagar mi liquidación de ley.";
+
+  tl.to(el, { opacity: 1, duration: 0.25 });
+  tl.to(el.querySelector(".form-title"), { opacity: 1, duration: 0.35 });
+  tl.to(el.querySelector(".form-subtitle"), { opacity: 1, duration: 0.3 }, "-=0.1");
+  tl.to(el.querySelector(".form-container"), {
+    opacity: 1, y: 0, duration: 0.4, ease: "power2.out"
+  });
+
+  tl.to("#typewriter-target", {
+    duration: 3.0,
+    text: { value: typewriterText, delimiter: "" },
+    ease: "none"
+  }, "+=0.2");
+
+  tl.to({}, { duration: 0.3 });
+  tl.to(el, { opacity: 0, duration: 0.3 });
+})();
+
+/* ══════════════════════════════════════════
+   SCENE 6 — "Atención inmediata 24/7" (22s – 25s)
+   ══════════════════════════════════════════ */
+(function () {
+  const el = document.getElementById("scene-overlay-3");
+  const tl = gsap.timeline({ data: { clipId: "scene-overlay-3" } });
+  overlayScene(tl, el);
+})();
+
+/* ══════════════════════════════════════════
+   SCENE 7 — WhatsApp CTA + Pulse (25s – 30s)
+   ══════════════════════════════════════════ */
+(function () {
+  const el = document.getElementById("scene-whatsapp");
+  const tl = gsap.timeline({ data: { clipId: "scene-whatsapp" } });
+
+  const btn = document.getElementById("wa-pulse-btn");
+  const label = el.querySelector(".wa-label");
+  const endcard = el.querySelector(".wa-endcard");
+
+  tl.to(el, { opacity: 1, duration: 0.3 });
+  tl.to(label, { opacity: 1, duration: 0.4 });
+  tl.fromTo(btn,
+    { opacity: 0, scale: 0.8 },
+    { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }
+  );
+
+  /* Infinite pulse — loops for the remaining ~3.5s */
+  tl.to(btn, {
+    scale: 1.08,
+    boxShadow: "0 0 50px rgba(37,211,102,0.6), 0 0 100px rgba(37,211,102,0.3)",
+    duration: 0.5,
+    repeat: 6,
+    yoyo: true,
+    ease: "sine.inOut"
+  });
+
+  tl.to(endcard, { opacity: 1, duration: 0.3 }, "-=2");
+  tl.to(el, { opacity: 0, duration: 0.5 }, "+=0.2");
+})();
+</script>
+</body>
+</html>
